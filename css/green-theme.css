@@ -1,0 +1,29 @@
+body {
+    background: url(../img/trama-verde-nero-small.jpg) rgba(0,0,0,0.8);
+}
+
+h2 {
+    color: rgba(0, 167, 0, 0.8);
+}
+
+
+#logo {
+    color: rgba(0, 167, 0, 0.8);
+}
+
+.search-bar input {
+    border: 1px solid rgba(0, 167, 0, 0.8);
+}
+
+.search-bar input[placeholder] {
+    color: rgba(0, 167, 0, 0.8);
+}
+
+.search-bar button {
+    color: #000;
+    background-color: rgba(0, 167, 0, 0.8);
+}
+
+.film-box {
+    border: 1px solid rgba(0, 167, 0, 0.3);
+}

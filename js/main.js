@@ -52,3 +52,16 @@ function ajaxFilms() {
         });
     }
 }
+
+var greenTheme = $('head link[href*=green-theme]');
+var redTheme = $('head link[href*=red-theme]');
+
+$('#green').click(function() {
+    $('head link[href*=green-theme]').remove();
+    greenTheme.insertAfter('head link[href*=red-theme]');
+});
+
+$('#red').click(function() {
+    $('head link[href*=red-theme]').remove();
+    redTheme.insertAfter('head link[href*=green-theme]');
+});

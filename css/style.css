@@ -11,16 +11,14 @@ html {
 body {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
-    background: url(../img/trama-rosso-nero-small.jpg) rgba(0,0,0,0.8);
     /* background-size: cover; */
     /* background-repeat: no-repeat; */
     background-blend-mode: overlay;
-    scrollbar-color: #e50914 #b3b3b3;
     color: rgba(255,255,255,0.8);
 }
 
 h2 {
-    color: rgba(230, 9, 20, 0.8);
+    /* color: rgba(230, 9, 20, 0.8); */
     margin-bottom: 5px;
     font-size: 1.2rem;
     font-weight: 700;
@@ -52,9 +50,29 @@ nav {
 }
 
 #logo {
-    color: rgba(230, 9, 20, 0.8);
+    /* color: rgba(230, 9, 20, 0.8); */
     font-size: 30px;
     font-weight: 700;
+}
+
+.theme button {
+    height: 30px;
+    width: 60px;
+    color: #000;
+    border-radius: 5px;
+    font-weight: 700;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 5px;
+}
+
+.theme #red {
+    background-color: rgba(230, 9, 20, 0.8);
+}
+
+.theme #green {
+    background-color: rgba(0, 167, 0, 0.8);
 }
 
 .search-bar input {
@@ -64,19 +82,19 @@ nav {
     padding: 0 10px;
     margin-right: 5px;
     border-radius: 5px;
-    border: 1px solid rgba(230, 9, 20, 0.8);
+    /* border: 1px solid rgba(230, 9, 20, 0.8); */
 }
 
 .search-bar input[placeholder] {
-    color: rgba(230, 9, 20, 0.8);
+    /* color: rgba(230, 9, 20, 0.8); */
 }
 
 .search-bar button {
     padding: 0 10px;
     height: 30px;
     font-weight: 700;
-    color: #000;
-    background-color: rgba(230, 9, 20, 0.8);
+    /* color: #000; */
+    /* background-color: rgba(230, 9, 20, 0.8); */
     border: none;
     border-radius: 5px;
 }
@@ -101,7 +119,7 @@ nav {
     text-align: center;
     background-color: rgba(0,0,0,0.75);
     border-radius: 7px;
-    border: 1px solid rgba(230, 9, 20, 0.3);
+    /* border: 1px solid rgba(230, 9, 20, 0.3); */
     padding: 10px;
     margin: 7px;
 }

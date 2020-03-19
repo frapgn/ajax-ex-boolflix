@@ -4,29 +4,41 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 16px;
+}
+
 body {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
-    background: url(../img/background3.jpg) rgba(0,0,0,0.7);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: url(../img/trama-rosso-nero-small.jpg) rgba(0,0,0,0.8);
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
     background-blend-mode: overlay;
-    scrollbar-color: #aa1818 #b3b3b3;
+    scrollbar-color: #e50914 #b3b3b3;
     color: rgba(255,255,255,0.8);
 }
 
 h2 {
     color: rgba(230, 9, 20, 0.8);
     margin-bottom: 5px;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 h3 {
     margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 nav {
     height: 60px;
     background-color: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
 }
 
 .nav-container {
@@ -80,17 +92,16 @@ nav {
 }
 
 .film-box {
-    flex-basis: 200px;
+    flex-basis: 205px;
     height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.75);
     border-radius: 7px;
     border: 1px solid rgba(230, 9, 20, 0.3);
     padding: 10px;
-    margin: 10px;
-
+    margin: 7px;
 }

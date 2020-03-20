@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/red-theme.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/eb054ca6c4.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav>
@@ -25,7 +26,7 @@
             </div>
 
             <div class="search-bar">
-                <input id="search" type="text" placeholder="Cerca..." name="" value="">
+                <input id="search" type="text" placeholder="Cerca..." name="" value="star wars">
                 <button id="search-button">Cerca</button>
             </div>
         </div>
@@ -35,13 +36,31 @@
 
     </div>
 
-    <!-- film-box template -->
-    <script id="film-box-template" type="text/x-handlebars-template">
-        <div class="film-box">
-            <h2 class="title">{{title}}</h2>
-            <h3 class="original-title">({{originalTitle}})</h3>
-            <span class="original-language">{{originalLanguage}}</span>
-            <span class="vote-average">{{voteAverage}}</span>
+    <!-- box template -->
+    <script id="box-template" type="text/x-handlebars-template">
+        <div class="box-container">
+            <div class="box">
+                <h2 class="title">{{title}}</h2>
+                <h3 class="original-title">({{originalTitle}})</h3>
+                <span class="original-language">{{originalLanguage}}</span>
+                <div class="stars-container">
+                    <span class="vote-average">{{voteAverage}}</span>
+                    <span class="stars"
+                        style="background: linear-gradient(90deg, rgba(226,194,9,1) 0%, rgba(226,194,9,1) {{voteAveragePercentage}}%, rgba(255,255,255,1) {{voteAveragePercentage}}%, rgba(255,255,255,1) 100%);
+                        font-size: 25px;
+                        /* -webkit-text-fill-color: transparent; */
+                        background-clip: text;
+                        -webkit-background-clip: text;
+                        color: transparent;"
+                    >
+                        &#128970;
+                        &#128970;
+                        &#128970;
+                        &#128970;
+                        &#128970;
+                    </span>
+                </div>
+            </div>
         </div>
     </script>
     <!-- end film-box template -->

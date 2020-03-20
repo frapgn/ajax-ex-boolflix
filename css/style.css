@@ -106,11 +106,18 @@ nav {
     flex-wrap: wrap;
     width: 90%;
     max-width: 1200px;
-    padding: 100px 10px;
+    padding: 130px 10px 100px 10px;
 }
 
-.film-box {
-    flex-basis: 205px;
+.box-container {
+    display: flex;
+    padding: 2px;
+    flex-basis: calc(100% / 5);
+}
+
+.box {
+    /* flex-basis: calc(100% / 4); */
+    width: 100%;
     height: 300px;
     display: flex;
     flex-direction: column;
@@ -120,6 +127,26 @@ nav {
     background-color: rgba(0,0,0,0.75);
     border-radius: 7px;
     /* border: 1px solid rgba(230, 9, 20, 0.3); */
-    padding: 10px;
-    margin: 7px;
+    padding: 15px;
+}
+
+.stars-container {
+    display: flex;
+    align-items: center;
+}
+
+.vote-average {
+    display: inline-block;
+    line-height: 25px;
+    padding-right: 5px;
+    padding-top: 2px;
+    font-weight: 700;
+}
+
+.stars {
+    line-height: 25px;
+    /* font-size: 25px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent; */
 }

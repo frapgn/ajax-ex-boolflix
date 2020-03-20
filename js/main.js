@@ -1,27 +1,31 @@
 
-var api_base_url = 'https://api.themoviedb.org/3';
 
-var filmBoxSrc = $('#film-box-template').html();
-var filmBoxTemplate = Handlebars.compile(filmBoxSrc);
+
+var boxTemplateSrc = $('#box-template').html();
+var boxTemplate = Handlebars.compile(boxTemplateSrc);
 
 $('#search-button').click(function() {
-    ajaxFilms();
+    search();
 });
 
-$('#search').keypress(function() {
+$('#search').keypress(function(event) {
     if(event.key == 'Enter') {
-        ajaxFilms();
+        search();
     }
 });
 
 
 // Funzioni
-function ajaxFilms() {
+function search(){
+    var searchValue = $('#search').val();
     if ($('#search').val() != '') {
-        var searchValue = $('#search').val();
-        $('#search').val('');
-        $('.film-box').remove();
+        // $('#search').val('');
+        $('.box').remove();
+        ajaxMovies(searchValue);
+}
 
+function ajaxMovies(searchValue) {
+    var api_base_url = 'https://api.themoviedb.org/3';
         $.ajax({
             url: api_base_url + '/search/movie',
             method: 'GET',
@@ -32,19 +36,8 @@ function ajaxFilms() {
             },
             success: function(res) {
                 console.log(res);
-                var films = res.results;
-                for (var i = 0; i < films.length; i++) {
-                    var film = {
-                        title: films[i].title,
-                        originalTitle: films[i].original_title,
-                        originalLanguage: films[i].original_language,
-                        voteAverage: films[i].vote_average
-                    }
-
-                    filmBoxTemplateHTML = filmBoxTemplate(film);
-                    $('.container').append(filmBoxTemplateHTML);
-                }
-
+                var movies = res.results;
+                 appendBox(movies);
             },
             error: function() {
                 console.log('Errore');
@@ -53,6 +46,26 @@ function ajaxFilms() {
     }
 }
 
+function appendBox(movies) {
+    for (var i = 0; i < movies.length; i++) {
+        var movie = {
+            title: movies[i].title,
+            originalTitle: movies[i].original_title,
+            originalLanguage: movies[i].original_language,
+            voteAverage: movies[i].vote_average,
+            voteAveragePercentage: movies[i].vote_average * 10
+        }
+
+        boxTemplateHTML = boxTemplate(movie);
+        $('.container').append(boxTemplateHTML);
+    }
+}
+
+function stars(vote){
+    return
+}
+
+// ----------------------------------------------------------
 var greenTheme = $('head link[href*=green-theme]');
 var redTheme = $('head link[href*=red-theme]');
 

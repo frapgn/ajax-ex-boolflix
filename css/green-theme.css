@@ -1,6 +1,5 @@
 body {
-    background: url(../img/trama-verde-nero-small.jpg) rgba(0,0,0,0.8);
-}
+    background: rgb(42, 42, 42)}
 
 h2 {
     color: rgba(0, 167, 0, 0.8);
@@ -25,5 +24,5 @@ h2 {
 }
 
 .box {
-    border: 1px solid rgba(0, 167, 0, 0.3);
+    /* border: 1px solid rgba(0, 167, 0, 0.3); */
 }

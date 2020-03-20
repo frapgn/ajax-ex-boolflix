@@ -26,7 +26,7 @@
             </div>
 
             <div class="search-bar">
-                <input id="search" type="text" placeholder="Cerca..." name="" value="star wars">
+                <input id="search" type="text" placeholder="Cerca..." name="" value="hello">
                 <button id="search-button">Cerca</button>
             </div>
         </div>
@@ -39,26 +39,29 @@
     <!-- box template -->
     <script id="box-template" type="text/x-handlebars-template">
         <div class="box-container">
-            <div class="box">
-                <h2 class="title">{{title}}</h2>
-                <h3 class="original-title">({{originalTitle}})</h3>
-                <span class="original-language">{{originalLanguage}}</span>
-                <div class="stars-container">
-                    <span class="vote-average">{{voteAverage}}</span>
-                    <span class="stars"
-                        style="background: linear-gradient(90deg, rgba(226,194,9,1) 0%, rgba(226,194,9,1) {{voteAveragePercentage}}%, rgba(255,255,255,1) {{voteAveragePercentage}}%, rgba(255,255,255,1) 100%);
-                        font-size: 25px;
-                        /* -webkit-text-fill-color: transparent; */
-                        background-clip: text;
-                        -webkit-background-clip: text;
-                        color: transparent;"
-                    >
-                        &#128970;
-                        &#128970;
-                        &#128970;
-                        &#128970;
-                        &#128970;
-                    </span>
+            <div class="img-container">
+                <img src="https://picsum.photos/200/300?random=1" alt="">
+                <div class="box">
+                    <h2 class="title">{{title}}</h2>
+                    <h3 class="original-title">({{originalTitle}})</h3>
+                    <span class="original-language">Original Language <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png"></span>
+                    <div class="stars-container">
+                        <span class="vote-average">{{voteAverage}}</span>
+                        <span class="stars"
+                            style="background: linear-gradient(90deg, rgba(226,194,9,1) 0%, rgba(226,194,9,1) {{voteAveragePercentage}}%, rgba(255,255,255,1) {{voteAveragePercentage}}%, rgba(255,255,255,1) 100%);
+                            font-size: 25px;
+                            /* -webkit-text-fill-color: transparent; */
+                            background-clip: text;
+                            -webkit-background-clip: text;
+                            color: transparent;"
+                        >
+                            &#128970;
+                            &#128970;
+                            &#128970;
+                            &#128970;
+                            &#128970;
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

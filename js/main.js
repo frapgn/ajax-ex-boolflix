@@ -20,7 +20,7 @@ function search(){
     var searchValue = $('#search').val();
     if ($('#search').val() != '') {
         // $('#search').val('');
-        $('.box').remove();
+        $('.box-container').remove();
         ajaxMovies(searchValue);
 }
 
@@ -55,6 +55,12 @@ function appendBox(movies) {
             voteAverage: movies[i].vote_average,
             voteAveragePercentage: movies[i].vote_average * 10
         }
+
+        if (movie.originalLanguage == 'en') {
+            movie.originalLanguage = 'gb';
+        }
+
+
 
         boxTemplateHTML = boxTemplate(movie);
         $('.container').append(boxTemplateHTML);

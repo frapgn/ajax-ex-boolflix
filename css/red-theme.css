@@ -1,5 +1,6 @@
 body {
-    background: url(../img/trama-rosso-nero-small.jpg) rgba(0,0,0,0.8);
+    /* background: url(../img/trama-rosso-nero-small.jpg) rgba(0,0,0,0.8); */
+    background: rgb(42, 42, 42)
 }
 
 h2 {
@@ -24,5 +25,6 @@ h2 {
 }
 
 .box {
-    border: 1px solid rgba(230, 9, 20, 0.3);
+    /* border: 1px solid rgba(230, 9, 20, 0.3); */
+    border: 2px solid rgb(42, 42, 42);
 }

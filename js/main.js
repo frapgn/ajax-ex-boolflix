@@ -53,14 +53,13 @@ function appendBox(movies) {
             originalTitle: movies[i].original_title,
             originalLanguage: movies[i].original_language,
             voteAverage: movies[i].vote_average,
-            voteAveragePercentage: movies[i].vote_average * 10
+            voteAveragePercentage: movies[i].vote_average * 10,
+            originalLanguageUpperCase: movies[i].original_language.toUpperCase()
         }
 
         if (movie.originalLanguage == 'en') {
             movie.originalLanguage = 'gb';
         }
-
-
 
         boxTemplateHTML = boxTemplate(movie);
         $('.container').append(boxTemplateHTML);

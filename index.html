@@ -44,7 +44,10 @@
                 <div class="box">
                     <h2 class="title">{{title}}</h2>
                     <h3 class="original-title">({{originalTitle}})</h3>
-                    <span class="original-language">Original Language <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png"></span>
+                    <div class="original-language-container">
+                        <span class="original-language">Original Language</span>
+                        <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png" onerror="this.src='';" alt="{{originalLanguageUpperCase}}">
+                    </div>
                     <div class="stars-container">
                         <span class="vote-average">{{voteAverage}}</span>
                         <span class="stars"

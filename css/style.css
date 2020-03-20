@@ -32,7 +32,7 @@ h3 {
 
 nav {
     height: 60px;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(15, 15, 15, 1);
     position: fixed;
     top: 0;
     right: 0;
@@ -155,8 +155,18 @@ nav {
     z-index: 1;
 }
 
-.original-language img {
+.original-language-container img {
     width: 20px;
+    vertical-align: middle;
+}
+
+.original-language-container img[alt] {
+    color: rgba(230, 9, 20, 0.8);
+    font-weight: 700;
+}
+
+.original-language {
+    padding-right: 5px;
 }
 
 .stars-container {

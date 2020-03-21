@@ -33,7 +33,18 @@
     </nav>
 
     <div class="container">
+        <div class="movies-container">
+            <h2>Movies</h2>
+            <div class="movies">
 
+            </div>
+        </div>
+        <div class="tv-shows-container">
+            <h2>Tv Shows</h2>
+            <div class="tv-shows">
+
+            </div>
+        </div>
     </div>
 
     <!-- box template -->
@@ -42,8 +53,8 @@
             <div class="img-container">
                 <img src="https://picsum.photos/200/300?random=1" alt="">
                 <div class="box">
-                    <h2 class="title">{{title}}</h2>
-                    <h3 class="original-title">({{originalTitle}})</h3>
+                    <h3 class="title">{{title}}</h3>
+                    <h4 class="original-title">({{originalTitle}})</h4>
                     <div class="original-language-container">
                         <span class="original-language">Original Language</span>
                         <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png" onerror="this.src='';" alt="{{originalLanguageUpperCase}}">

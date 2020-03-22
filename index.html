@@ -26,7 +26,7 @@
             </div>
 
             <div class="search-bar">
-                <input id="search" type="text" placeholder="Cerca..." name="" value="hello">
+                <input id="search" type="text" placeholder="Cerca..." name="" value="">
                 <button id="search-button">Cerca</button>
             </div>
         </div>
@@ -63,14 +63,14 @@
                     <h4 class="original-title"><span>Titolo Originale: </span><br>{{originalTitle}}</h4>
                     <div class="original-language-container">
                         <span class="original-language">Lingua Originale</span>
-                        <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png" alt="{{originalLanguageUpperCase}}">
+                        <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png" alt="{{originalLanguageUpperCase}}"> <!--  onerror="this.src=''" -->
                     </div>
                     <button id="show-overview" class="overview-btn">Descrizione</button>
                     <div class="overview-container hidden"> <!-- aggiungere classe hidden -->
                         <h3>Descrizione</h3>
-                        <p class="overview">
-                            {{overview}}
-                        </p>
+                        <div class="overview">
+                            <p>{{overview}}</p>
+                        </div>
                         <button id="hide-overview" class="overview-btn">Chiudi</button>
                     </div>
                     <div class="stars-container">

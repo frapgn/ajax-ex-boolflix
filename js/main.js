@@ -13,6 +13,15 @@ $('#search').keypress(function(event) {
     }
 });
 
+$('.container').on('click', '#show-overview', function() {
+    $(this).siblings('.overview-container').removeClass('hidden').addClass('flex');
+    console.log(this);
+});
+
+$('.container').on('click', '#hide-overview', function() {
+    $(this).parent('.overview-container').removeClass('flex').addClass('hidden');
+    console.log(this);
+});
 
 // Funzioni
 function search() {
@@ -76,7 +85,8 @@ function appendMovies(movies) {
             voteAverage: movies[i].vote_average,
             voteAveragePercentage: movies[i].vote_average * 10, // vedi css inline, classe stars
             originalLanguageUpperCase: movies[i].original_language.toUpperCase(),
-            poster: 'w342' + movies[i].poster_path
+            poster: 'w342' + movies[i].poster_path,
+            overview: movies[i].overview
         }
 
         if (movie.originalLanguage == 'en') {
@@ -88,8 +98,6 @@ function appendMovies(movies) {
 
         posterNotAvailable();
     }
-
-
 }
 
 function appendTvShows(tvShows) {
@@ -101,7 +109,8 @@ function appendTvShows(tvShows) {
             voteAverage: tvShows[i].vote_average,
             voteAveragePercentage: tvShows[i].vote_average * 10, // vedi css inline, classe stars
             originalLanguageUpperCase: tvShows[i].original_language.toUpperCase(),
-            poster: 'w342' + tvShows[i].poster_path
+            poster: 'w342' + tvShows[i].poster_path,
+            overview: tvShows[i].overview
         }
 
         if (tvShow.originalLanguage == 'en') {
@@ -117,8 +126,7 @@ function appendTvShows(tvShows) {
 
 function posterNotAvailable() {
     $('.img-container figure img').on('error', function() {
-        $(this).siblings('figcaption').removeClass('hidden');
-        $(this).siblings('figcaption').addClass('flex');
+        $(this).siblings('figcaption').removeClass('hidden').addClass('flex');
         this.src = 'img/default-poster.jpg';
     });
 }

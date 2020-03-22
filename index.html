@@ -60,10 +60,18 @@
                 </figure>
                 <div class="box">
                     <h3 class="title"><span>Titolo: </span><br>{{title}}</h3>
-                    <h4 class="original-title">({{originalTitle}})</h4>
+                    <h4 class="original-title"><span>Titolo Originale: </span><br>{{originalTitle}}</h4>
                     <div class="original-language-container">
-                        <span class="original-language">Original Language</span>
+                        <span class="original-language">Lingua Originale</span>
                         <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png" alt="{{originalLanguageUpperCase}}">
+                    </div>
+                    <button id="show-overview" class="overview-btn">Descrizione</button>
+                    <div class="overview-container hidden"> <!-- aggiungere classe hidden -->
+                        <h3>Descrizione</h3>
+                        <p class="overview">
+                            {{overview}}
+                        </p>
+                        <button id="hide-overview" class="overview-btn">Chiudi</button>
                     </div>
                     <div class="stars-container">
                         <span class="vote-average">{{voteAverage}}</span>

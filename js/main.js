@@ -86,11 +86,7 @@ function appendMovies(movies) {
         boxTemplateHTML = boxTemplate(movie);
         $('.container .movies').append(boxTemplateHTML);
 
-        $('.img-container figure img').on('error', function() {
-            $(this).siblings('figcaption').removeClass('hidden');
-            $(this).siblings('figcaption').addClass('flex');
-            this.src = 'img/default-poster.jpg';
-        });
+        posterNotAvailable();
     }
 
 
@@ -115,15 +111,17 @@ function appendTvShows(tvShows) {
         boxTemplateHTML = boxTemplate(tvShow);
         $('.container .tv-shows').append(boxTemplateHTML);
 
-        $('.img-container figure img').on('error', function() {
-            $(this).siblings('figcaption').removeClass('hidden');
-            $(this).siblings('figcaption').addClass('flex');
-            this.src = 'img/default-poster.jpg';
-        });
+        posterNotAvailable();
     }
 }
 
-
+function posterNotAvailable() {
+    $('.img-container figure img').on('error', function() {
+        $(this).siblings('figcaption').removeClass('hidden');
+        $(this).siblings('figcaption').addClass('flex');
+        this.src = 'img/default-poster.jpg';
+    });
+}
 
 
 // ----------------------------------------------------------

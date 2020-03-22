@@ -128,6 +128,7 @@ nav {
     margin-right: 5px;
     border-radius: 5px;
     /* border: 1px solid rgba(230, 9, 20, 0.8); */
+    color: rgba(230, 9, 20, 0.8);
 }
 
 .search-bar input[placeholder] {
@@ -281,6 +282,7 @@ nav {
 
 .text-instead-of-the-flag {
     color: rgba(230, 9, 20, 0.8);
+    font-weight: 700;
 }
 
 .overview-btn {

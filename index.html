@@ -51,13 +51,19 @@
     <script id="box-template" type="text/x-handlebars-template">
         <div class="box-container">
             <div class="img-container">
-                <img src="https://picsum.photos/200/300?random=1" alt="">
+                <!-- <img src="https://image.tmdb.org/t/p/{{poster}}" alt="{{title}}" onerror="this.src='img/default-poster.jpg';" > -->
+                <figure>
+                    <img src="https://image.tmdb.org/t/p/{{poster}}" alt="{{title}}">
+                    <figcaption class="hidden">
+                        <p><span>BoolFlix</span><br>{{title}}</p>
+                    </figcaption>
+                </figure>
                 <div class="box">
-                    <h3 class="title">{{title}}</h3>
+                    <h3 class="title"><span>Titolo: </span><br>{{title}}</h3>
                     <h4 class="original-title">({{originalTitle}})</h4>
                     <div class="original-language-container">
                         <span class="original-language">Original Language</span>
-                        <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png" onerror="this.src='';" alt="{{originalLanguageUpperCase}}">
+                        <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png" alt="{{originalLanguageUpperCase}}">
                     </div>
                     <div class="stars-container">
                         <span class="vote-average">{{voteAverage}}</span>

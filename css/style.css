@@ -24,6 +24,10 @@ h3 {
     font-weight: 700;
 }
 
+h3 span {
+    color: #fff;
+}
+
 h4 {
     margin-bottom: 5px;
     font-size: 0.9rem;
@@ -137,20 +141,71 @@ nav {
     display: flex;
     padding: 2px;
     flex-basis: calc(100% / 5);
-    height: 300px;
+    height: 320px;
 }
 
 .img-container {
     width: 100%;
     height: 100%;
+    display: flex;
 }
 
-.img-container img {
+.img-container figure img {
     width: 100%;
     height: 100%;
+    background-color: #0f0f0f;
+}
+
+.img-container figure {
+    /* display: flex; */
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* background-color: #0f0f0f;
+    align-self: center; */
+}
+
+.img-container figure figcaption {
+    /* margin: auto; */
+    height: 80px;
+    background-color: #0f0f0f;
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(50%);
+}
+
+.hidden {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.img-container figure figcaption p {
+    margin: auto;
+    /* height: 100%; */
+    font-weight: 700;
+}
+
+.img-container figure figcaption p span {
+    font-size: 1.8rem;
+    color: rgba(230, 9, 20, 1);
+}
+
+.img-container img[alt] {
+    color: rgba(230, 9, 20, 0.8);
+    font-weight: 700;
+}
+
+.img-container:hover .box {
+    display: flex;
 }
 
 .box {
+    display: none;
     /* flex-basis: calc(100% / 4); */
     position: absolute;
     top: 0;
@@ -158,8 +213,8 @@ nav {
     left: 0;
     right: 0;
     width: 100%;
-    height: 300px;
-    display: flex;
+    height: 100%;
+    /* display: flex; */
     flex-direction: column;
     justify-content: space-around;
     align-items: center;

@@ -1,6 +1,5 @@
 
 
-
 var boxTemplateSrc = $('#box-template').html();
 var boxTemplate = Handlebars.compile(boxTemplateSrc);
 
@@ -16,7 +15,7 @@ $('#search').keypress(function(event) {
 
 
 // Funzioni
-function search(){
+function search() {
     var searchValue = $('#search').val();
     if ($('#search').val() != '') {
         // $('#search').val('');
@@ -28,46 +27,44 @@ function search(){
 
 function ajaxMovies(searchValue) {
     var api_base_url = 'https://api.themoviedb.org/3';
-        $.ajax({
-            url: api_base_url + '/search/movie',
-            method: 'GET',
-            data: {
-                api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
-                query: searchValue,
-                language: 'it-IT'
-            },
-            success: function(res) {
-                // console.log(res);
-                var movies = res.results;
-                 appendMovies(movies);
-            },
-            error: function() {
-                console.log('Errore');
-            }
-        });
-
+    $.ajax({
+        url: api_base_url + '/search/movie',
+        method: 'GET',
+        data: {
+            api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
+            query: searchValue,
+            language: 'it-IT'
+        },
+        success: function(res) {
+            // console.log(res);
+            var movies = res.results;
+             appendMovies(movies);
+        },
+        error: function() {
+            console.log('Errore');
+        }
+    });
 }
 
 function ajaxTvShows(searchValue) {
     var api_base_url = 'https://api.themoviedb.org/3';
-        $.ajax({
-            url: api_base_url + '/search/tv',
-            method: 'GET',
-            data: {
-                api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
-                query: searchValue,
-                language: 'it-IT'
-            },
-            success: function(res) {
-                console.log(res);
-                var tvShows = res.results;
-                 appendTvShows(tvShows);
-            },
-            error: function() {
-                console.log('Errore');
-            }
-        });
-
+    $.ajax({
+        url: api_base_url + '/search/tv',
+        method: 'GET',
+        data: {
+            api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
+            query: searchValue,
+            language: 'it-IT'
+        },
+        success: function(res) {
+            // console.log(res);
+            var tvShows = res.results;
+             appendTvShows(tvShows);
+        },
+        error: function() {
+            console.log('Errore');
+        }
+    });
 }
 
 function appendMovies(movies) {
@@ -78,7 +75,8 @@ function appendMovies(movies) {
             originalLanguage: movies[i].original_language,
             voteAverage: movies[i].vote_average,
             voteAveragePercentage: movies[i].vote_average * 10, // vedi css inline, classe stars
-            originalLanguageUpperCase: movies[i].original_language.toUpperCase()
+            originalLanguageUpperCase: movies[i].original_language.toUpperCase(),
+            poster: 'w342' + movies[i].poster_path
         }
 
         if (movie.originalLanguage == 'en') {
@@ -87,7 +85,15 @@ function appendMovies(movies) {
 
         boxTemplateHTML = boxTemplate(movie);
         $('.container .movies').append(boxTemplateHTML);
+
+        $('.img-container figure img').on('error', function() {
+            $(this).siblings('figcaption').removeClass('hidden');
+            $(this).siblings('figcaption').addClass('flex');
+            this.src = 'img/default-poster.jpg';
+        });
     }
+
+
 }
 
 function appendTvShows(tvShows) {
@@ -98,7 +104,8 @@ function appendTvShows(tvShows) {
             originalLanguage: tvShows[i].original_language,
             voteAverage: tvShows[i].vote_average,
             voteAveragePercentage: tvShows[i].vote_average * 10, // vedi css inline, classe stars
-            originalLanguageUpperCase: tvShows[i].original_language.toUpperCase()
+            originalLanguageUpperCase: tvShows[i].original_language.toUpperCase(),
+            poster: 'w342' + tvShows[i].poster_path
         }
 
         if (tvShow.originalLanguage == 'en') {
@@ -107,8 +114,18 @@ function appendTvShows(tvShows) {
 
         boxTemplateHTML = boxTemplate(tvShow);
         $('.container .tv-shows').append(boxTemplateHTML);
+
+        $('.img-container figure img').on('error', function() {
+            $(this).siblings('figcaption').removeClass('hidden');
+            $(this).siblings('figcaption').addClass('flex');
+            this.src = 'img/default-poster.jpg';
+        });
     }
 }
+
+
+
+
 // ----------------------------------------------------------
 var greenTheme = $('head link[href*=green-theme]');
 var redTheme = $('head link[href*=red-theme]');

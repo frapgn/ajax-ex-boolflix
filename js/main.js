@@ -1,9 +1,9 @@
 
-// Template
+// Template Handlebars
 var boxTemplateSrc = $('#box-template').html();
 var boxTemplate = Handlebars.compile(boxTemplateSrc);
 
-// Ricerca col click e con Enter
+// Ricerca con il click e con il tasto Enter
 $('#search-button').click(function() {
     search();
 });
@@ -30,14 +30,15 @@ function search() {
         $('#search').val('');
         $('.box-container').remove();
 
-        // ajaxMovies(searchValue);
-        // ajaxTvShows(searchValue);
+        // ajaxMovies(searchValue);     // OLD CODE
+        // ajaxTvShows(searchValue);    // OLD CODE
 
         ajaxMediaInfo('movie', searchValue);
         ajaxMediaInfo('tv', searchValue);
     }
 }
 
+// Chiamata ajax all'API
 function ajaxMediaInfo(type, searchValue) {
     var api_base_url = 'https://api.themoviedb.org/3';
     $.ajax({
@@ -58,6 +59,7 @@ function ajaxMediaInfo(type, searchValue) {
     });
 }
 
+// Ciclo l'array con il risultato della ricerca e faccio l'append degli oggetti con Handlebars
 var posterSize = 'w342';
 function appendMediaInfo(mediaType, mediaInfo) {
     for (var i = 0; i < mediaInfo.length; i++) {
@@ -80,16 +82,18 @@ function appendMediaInfo(mediaType, mediaInfo) {
             poster: posterSize + mediaInfo[i].poster_path,
             overview: mediaInfo[i].overview
         }
+        // Gestisco la bandierina della lingua inglese
         if (info.originalLanguage == 'en') { // FIXME: non riesco a far funzionare l'if in una funzione
             info.originalLanguage = 'gb';
         }
+        // Gestisco la descrizione non disponibile
         if (info.overview == '') { // FIXME: non riesco a far funzionare l'if in una funzione
             info.overview = 'Descrizione non disponibile';
         }
         boxTemplateHTML = boxTemplate(info);
         whereToAppend.append(boxTemplateHTML);
         posterNotAvailable();
-        imgNotAvailable(info.originalLanguageUpperCase);
+        flagNotAvailable(info.originalLanguageUpperCase);
     }
 }
 
@@ -99,6 +103,7 @@ function appendMediaInfo(mediaType, mediaInfo) {
 //     }
 // }
 
+// Gestisco la locandina non disponibile
 function posterNotAvailable() {
     $('.img-container figure img').on('error', function() {
         $(this).siblings('figcaption').removeClass('hidden').addClass('flex');
@@ -106,7 +111,8 @@ function posterNotAvailable() {
     });
 }
 
-function imgNotAvailable(originalLanguageUpperCase) {
+// Gestisco la bandierina non disponibile
+function flagNotAvailable(originalLanguageUpperCase) {
     $('.original-language-container img').on('error', function() {
         $(this).parent().append('<span class="text-instead-of-the-flag">' + originalLanguageUpperCase + '</span>');
         $(this).remove();

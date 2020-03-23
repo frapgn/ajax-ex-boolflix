@@ -29,15 +29,19 @@ function search() {
     if ($('#search').val() != '') {
         $('#search').val('');
         $('.box-container').remove();
-        ajaxMovies(searchValue);
-        ajaxTvShows(searchValue);
+
+        // ajaxMovies(searchValue);
+        // ajaxTvShows(searchValue);
+
+        ajaxMediaInfo('movie', searchValue);
+        ajaxMediaInfo('tv', searchValue);
     }
 }
 
-function ajaxMovies(searchValue) {
+function ajaxMediaInfo(type, searchValue) {
     var api_base_url = 'https://api.themoviedb.org/3';
     $.ajax({
-        url: api_base_url + '/search/movie',
+        url: api_base_url + '/search/' + type,
         method: 'GET',
         data: {
             api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
@@ -45,8 +49,8 @@ function ajaxMovies(searchValue) {
             language: 'it-IT'
         },
         success: function(res) {
-            var movies = res.results;
-             appendMovies(movies);
+            var mediaInfo = res.results;
+             appendMediaInfo(type, mediaInfo);
         },
         error: function() {
             console.log('Errore');
@@ -54,75 +58,39 @@ function ajaxMovies(searchValue) {
     });
 }
 
-function ajaxTvShows(searchValue) {
-    var api_base_url = 'https://api.themoviedb.org/3';
-    $.ajax({
-        url: api_base_url + '/search/tv',
-        method: 'GET',
-        data: {
-            api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
-            query: searchValue,
-            language: 'it-IT'
-        },
-        success: function(res) {
-            var tvShows = res.results;
-             appendTvShows(tvShows);
-        },
-        error: function() {
-            console.log('Errore');
+var posterSize = 'w342';
+function appendMediaInfo(mediaType, mediaInfo) {
+    for (var i = 0; i < mediaInfo.length; i++) {
+        if (mediaType == 'movie') {
+            var infoTitle = mediaInfo[i].title;
+            var infoOriginalTitle = mediaInfo[i].original_title;
+            var whereToAppend = $('.container .movies');
+        } else if (mediaType == 'tv') {
+            var infoTitle = mediaInfo[i].name;
+            var infoOriginalTitle = mediaInfo[i].original_name;
+            var whereToAppend = $('.container .tv-shows');
         }
-    });
-}
-
-function appendMovies(movies) {
-    for (var i = 0; i < movies.length; i++) {
-        var movie = {
-            title: movies[i].title,
-            originalTitle: movies[i].original_title,
-            originalLanguage: movies[i].original_language,
-            voteAverage: movies[i].vote_average,
-            voteAveragePercentage: movies[i].vote_average * 10, // vedi css inline, classe stars
-            originalLanguageUpperCase: movies[i].original_language.toUpperCase(),
-            poster: 'w342' + movies[i].poster_path,
-            overview: movies[i].overview
+        var info = {
+            title: infoTitle,
+            originalTitle: infoOriginalTitle,
+            originalLanguage: mediaInfo[i].original_language,
+            voteAverage: mediaInfo[i].vote_average,
+            voteAveragePercentage: mediaInfo[i].vote_average * 10, // vedi css inline, classe stars
+            originalLanguageUpperCase: mediaInfo[i].original_language.toUpperCase(),
+            poster: posterSize + mediaInfo[i].poster_path,
+            overview: mediaInfo[i].overview
         }
-        if (movie.originalLanguage == 'en') { // FIXME: non riesco a far funzionare l'if in una funzione
-            movie.originalLanguage = 'gb';
+        if (info.originalLanguage == 'en') { // FIXME: non riesco a far funzionare l'if in una funzione
+            info.originalLanguage = 'gb';
         }
-        if (movie.overview == '') { // FIXME: non riesco a far funzionare l'if in una funzione
-            movie.overview = 'Descrizione non disponibile';
+        if (info.overview == '') { // FIXME: non riesco a far funzionare l'if in una funzione
+            info.overview = 'Descrizione non disponibile';
         }
-        boxTemplateHTML = boxTemplate(movie);
-        $('.container .movies').append(boxTemplateHTML);
+        boxTemplateHTML = boxTemplate(info);
+        whereToAppend.append(boxTemplateHTML);
         posterNotAvailable();
-        imgNotAvailable(movie.originalLanguageUpperCase);
+        imgNotAvailable(info.originalLanguageUpperCase);
     }
-}
-
-function appendTvShows(tvShows) {
-    for (var i = 0; i < tvShows.length; i++) {
-        var tvShow = {
-            title: tvShows[i].name,
-            originalTitle: tvShows[i].original_name,
-            originalLanguage: tvShows[i].original_language,
-            voteAverage: tvShows[i].vote_average,
-            voteAveragePercentage: tvShows[i].vote_average * 10, // vedi css inline, classe stars
-            originalLanguageUpperCase: tvShows[i].original_language.toUpperCase(),
-            poster: 'w342' + tvShows[i].poster_path,
-            overview: tvShows[i].overview
-        }
-        if (tvShow.originalLanguage == 'en') { // FIXME: non riesco a far funzionare l'if in una funzione
-            tvShow.originalLanguage = 'gb';
-        }
-        if (tvShow.overview == '') { // FIXME: non riesco a far funzionare l'if in una funzione
-            tvShow.overview = 'Descrizione non disponibile';
-        }
-        boxTemplateHTML = boxTemplate(tvShow);
-        $('.container .tv-shows').append(boxTemplateHTML);
-        posterNotAvailable();
-        imgNotAvailable(tvShow.originalLanguageUpperCase);
-    }
-
 }
 
 // function flagENtoGB(originalLanguage) {
@@ -151,7 +119,7 @@ function imgNotAvailable(originalLanguageUpperCase) {
 //     }
 // }
 
-// ----------------------------------------------------------
+// Change template color
 var greenTheme = $('head link[href*=green-theme]');
 var redTheme = $('head link[href*=red-theme]');
 
@@ -164,3 +132,97 @@ $('#red').click(function() {
     $('head link[href*=red-theme]').remove();
     redTheme.insertAfter('head link[href*=green-theme]');
 });
+
+
+// OLD CODE ------------------------------------------------
+
+// function ajaxMovies(searchValue) {
+//     var api_base_url = 'https://api.themoviedb.org/3';
+//     $.ajax({
+//         url: api_base_url + '/search/movie',
+//         method: 'GET',
+//         data: {
+//             api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
+//             query: searchValue,
+//             language: 'it-IT'
+//         },
+//         success: function(res) {
+//             var movies = res.results;
+//              appendMovies(movies);
+//         },
+//         error: function() {
+//             console.log('Errore');
+//         }
+//     });
+// }
+//
+// function ajaxTvShows(searchValue) {
+//     var api_base_url = 'https://api.themoviedb.org/3';
+//     $.ajax({
+//         url: api_base_url + '/search/tv',
+//         method: 'GET',
+//         data: {
+//             api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
+//             query: searchValue,
+//             language: 'it-IT'
+//         },
+//         success: function(res) {
+//             var tvShows = res.results;
+//              appendTvShows(tvShows);
+//         },
+//         error: function() {
+//             console.log('Errore');
+//         }
+//     });
+// }
+//
+// function appendMovies(movies) {
+//     for (var i = 0; i < movies.length; i++) {
+//         var movie = {
+//             title: movies[i].title,
+//             originalTitle: movies[i].original_title,
+//             originalLanguage: movies[i].original_language,
+//             voteAverage: movies[i].vote_average,
+//             voteAveragePercentage: movies[i].vote_average * 10, // vedi css inline, classe stars
+//             originalLanguageUpperCase: movies[i].original_language.toUpperCase(),
+//             poster: 'w342' + movies[i].poster_path,
+//             overview: movies[i].overview
+//         }
+//         if (movie.originalLanguage == 'en') { // FIXME: non riesco a far funzionare l'if in una funzione
+//             movie.originalLanguage = 'gb';
+//         }
+//         if (movie.overview == '') { // FIXME: non riesco a far funzionare l'if in una funzione
+//             movie.overview = 'Descrizione non disponibile';
+//         }
+//         boxTemplateHTML = boxTemplate(movie);
+//         $('.container .movies').append(boxTemplateHTML);
+//         posterNotAvailable();
+//         imgNotAvailable(movie.originalLanguageUpperCase);
+//     }
+// }
+//
+// function appendTvShows(tvShows) {
+//     for (var i = 0; i < tvShows.length; i++) {
+//         var tvShow = {
+//             title: tvShows[i].name,
+//             originalTitle: tvShows[i].original_name,
+//             originalLanguage: tvShows[i].original_language,
+//             voteAverage: tvShows[i].vote_average,
+//             voteAveragePercentage: tvShows[i].vote_average * 10, // vedi css inline, classe stars
+//             originalLanguageUpperCase: tvShows[i].original_language.toUpperCase(),
+//             poster: 'w342' + tvShows[i].poster_path,
+//             overview: tvShows[i].overview
+//         }
+//         if (tvShow.originalLanguage == 'en') { // FIXME: non riesco a far funzionare l'if in una funzione
+//             tvShow.originalLanguage = 'gb';
+//         }
+//         if (tvShow.overview == '') { // FIXME: non riesco a far funzionare l'if in una funzione
+//             tvShow.overview = 'Descrizione non disponibile';
+//         }
+//         boxTemplateHTML = boxTemplate(tvShow);
+//         $('.container .tv-shows').append(boxTemplateHTML);
+//         posterNotAvailable();
+//         imgNotAvailable(tvShow.originalLanguageUpperCase);
+//     }
+//
+// }

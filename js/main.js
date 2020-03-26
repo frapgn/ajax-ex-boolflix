@@ -34,7 +34,7 @@ $('.container').on('click', '#more-info-btn', function() {
 function search() {
     var searchValue = $('#search').val();
     if ($('#search').val() != '') {
-        $('#search').val('');
+        // $('#search').val('');
         $('.box-container').remove();
 
         // ajaxMovies(searchValue);     // OLD CODE
@@ -45,7 +45,7 @@ function search() {
     }
 }
 
-// Chiamata ajax all'API
+// Chiamata ajax all'API: Vari dati da MOVIES e TV
 function ajaxGetMediaInfo(mediaType, mediaId) {
     var api_base_url = 'https://api.themoviedb.org/3/';
     $.ajax({
@@ -56,13 +56,28 @@ function ajaxGetMediaInfo(mediaType, mediaId) {
             language: 'it-IT'
         },
         success: function(res) {
-            var genres = res.genres;
-
+            var genres = res.genres; // array con id e genere corrispondente
+            appendGenres(genres, mediaId);
         },
         error: function() {
             console.log('Errore!');
         }
     });
+}
+
+var moreInfoTemplateSrc = $('#more-info-template').html();
+var moreInfoTemplate = Handlebars.compile(moreInfoTemplateSrc);
+
+function appendGenres(mediaGenres, mediaId) {
+    var whereToAppend = $('.box-container[data-box-id="' + mediaId + '"] .box');
+    moreInfoTemplateHTML = moreInfoTemplate();
+    whereToAppend.append(moreInfoTemplateHTML);
+
+    for (var i = 0; i < mediaGenres.length; i++) {
+        // var genreId = mediaGenres[i].id;
+        var genreName = mediaGenres[i].name;
+        whereToAppend.find('.more-info').append('<span>' + genreName + '</span>');
+    }
 }
 
 // Chiamata ajax all'API: SEARCH -> Search Movies, Search TV Shows

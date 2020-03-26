@@ -298,8 +298,9 @@ nav {
     border-radius: 3px;
 }
 
-#show-overview:hover,
-#hide-overview:hover {
+#show-overview-btn:hover,
+#hide-overview-btn:hover,
+#more-info-btn:hover {
     background-color: rgba(230, 9, 20, 1);
     color: rgba(255, 255, 255, 1);
 }
@@ -321,6 +322,31 @@ nav {
 }
 
 .overview {
+    display: flex;
+    margin-bottom: 5px;
+    font-size: 0.8rem;
+    flex-basis: 80%;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+.more-info-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #000;
+}
+
+.more-info {
     display: flex;
     margin-bottom: 5px;
     font-size: 0.8rem;

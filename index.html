@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ajax-ex-boolfix</title>
+    <link rel="shortcut icon" href="img/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/green-theme.css">
@@ -26,7 +27,7 @@
             </div>
 
             <div class="search-bar">
-                <input id="search" type="text" placeholder="Cerca..." name="" value="">
+                <input id="search" type="text" placeholder="Cerca..." name="" value="glass">
                 <button id="search-button">Cerca</button>
             </div>
         </div>
@@ -97,6 +98,17 @@
     </script>
     <!-- end film-box template -->
 
+    <!-- more info template -->
+    <script id="more-info-template" type="text/x-handlebars-template">
+        <div class="more-info-container"> <!-- aggiungere classe hidden -->
+            <h3>Altre Informazioni</h3>
+            <div class="more-info">
+                <h3>Generi</h3>
+            </div>
+            <button id="hide-more-info-btn" class="overview-btn">Chiudi</button>
+        </div>
+    </script>
+    <!-- end more info template -->
     <script src="js/main.js" charset="utf-8"></script>
 </body>
 </html>

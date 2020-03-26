@@ -49,7 +49,7 @@
 
     <!-- box template -->
     <script id="box-template" type="text/x-handlebars-template">
-        <div class="box-container">
+        <div class="box-container" data-box-id="{{mediaId}}" data-media-type="{{type}}">
             <div class="img-container">
                 <!-- <img src="https://image.tmdb.org/t/p/{{poster}}" alt="{{title}}" onerror="this.src='img/default-poster.jpg';" > -->
                 <figure>
@@ -65,14 +65,15 @@
                         <span class="original-language">Lingua Originale</span>
                         <img src="https://www.countryflags.io/{{originalLanguage}}/flat/64.png" alt="{{originalLanguageUpperCase}}"> <!--  onerror="this.src=''" -->
                     </div>
-                    <button id="show-overview" class="overview-btn">Descrizione</button>
+                    <button id="show-overview-btn" class="overview-btn">Descrizione</button>
                     <div class="overview-container hidden"> <!-- aggiungere classe hidden -->
                         <h3>Descrizione</h3>
                         <div class="overview">
                             <p>{{overview}}</p>
                         </div>
-                        <button id="hide-overview" class="overview-btn">Chiudi</button>
+                        <button id="hide-overview-btn" class="overview-btn">Chiudi</button>
                     </div>
+                    <button id="more-info-btn" class="overview-btn">More Info</button>
                     <div class="stars-container">
                         <span class="vote-average">{{voteAverage}}</span>
                         <span class="stars"
@@ -82,7 +83,7 @@
                             background-clip: text;
                             -webkit-background-clip: text;
                             color: transparent;"
-                        >
+                            >
                             &#128970;
                             &#128970;
                             &#128970;

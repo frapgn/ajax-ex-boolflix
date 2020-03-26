@@ -15,12 +15,19 @@ $('#search').keypress(function(event) {
 });
 
 // Visualizza / Nascondi Descrizione
-$('.container').on('click', '#show-overview', function() {
+$('.container').on('click', '#show-overview-btn', function() {
     $(this).siblings('.overview-container').removeClass('hidden').addClass('flex');
 });
 
-$('.container').on('click', '#hide-overview', function() {
+$('.container').on('click', '#hide-overview-btn', function() {
     $(this).parent('.overview-container').removeClass('flex').addClass('hidden');
+});
+
+// Ottieni info aggiuntive dopo il click sul pulsante More Info
+$('.container').on('click', '#more-info-btn', function() {
+    var mediaID = $(this).parents('.box-container').data('boxId');
+    var mediaType = $(this).parents('.box-container').data('mediaType');
+    ajaxGetMediaInfo(mediaType, mediaID);
 });
 
 // Funzioni
@@ -33,16 +40,36 @@ function search() {
         // ajaxMovies(searchValue);     // OLD CODE
         // ajaxTvShows(searchValue);    // OLD CODE
 
-        ajaxMediaInfo('movie', searchValue);
-        ajaxMediaInfo('tv', searchValue);
+        ajaxSearchMediaPreview('movie', searchValue);
+        ajaxSearchMediaPreview('tv', searchValue);
     }
 }
 
 // Chiamata ajax all'API
-function ajaxMediaInfo(type, searchValue) {
+function ajaxGetMediaInfo(mediaType, mediaId) {
+    var api_base_url = 'https://api.themoviedb.org/3/';
+    $.ajax({
+        url: api_base_url + mediaType + '/' + mediaId,
+        method: 'GET',
+        data: {
+            api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
+            language: 'it-IT'
+        },
+        success: function(res) {
+            var genres = res.genres;
+
+        },
+        error: function() {
+            console.log('Errore!');
+        }
+    });
+}
+
+// Chiamata ajax all'API: SEARCH -> Search Movies, Search TV Shows
+function ajaxSearchMediaPreview(mediaType, searchValue) {
     var api_base_url = 'https://api.themoviedb.org/3';
     $.ajax({
-        url: api_base_url + '/search/' + type,
+        url: api_base_url + '/search/' + mediaType,
         method: 'GET',
         data: {
             api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
@@ -50,37 +77,39 @@ function ajaxMediaInfo(type, searchValue) {
             language: 'it-IT'
         },
         success: function(res) {
-            var mediaInfo = res.results;
-             appendMediaInfo(type, mediaInfo);
+            var mediaPreview = res.results;
+             appendMediaPreview(mediaType, mediaPreview);
         },
         error: function() {
-            console.log('Errore');
+            console.log('Errore!');
         }
     });
 }
 
 // Ciclo l'array con il risultato della ricerca e faccio l'append degli oggetti con Handlebars
 var posterSize = 'w342';
-function appendMediaInfo(mediaType, mediaInfo) {
-    for (var i = 0; i < mediaInfo.length; i++) {
+function appendMediaPreview(mediaType, mediaJSON) {
+    for (var i = 0; i < mediaJSON.length; i++) {
         if (mediaType == 'movie') {
-            var infoTitle = mediaInfo[i].title;
-            var infoOriginalTitle = mediaInfo[i].original_title;
+            var infoTitle = mediaJSON[i].title;
+            var infoOriginalTitle = mediaJSON[i].original_title;
             var whereToAppend = $('.container .movies');
         } else if (mediaType == 'tv') {
-            var infoTitle = mediaInfo[i].name;
-            var infoOriginalTitle = mediaInfo[i].original_name;
+            var infoTitle = mediaJSON[i].name;
+            var infoOriginalTitle = mediaJSON[i].original_name;
             var whereToAppend = $('.container .tv-shows');
         }
         var info = {
+            type: mediaType,
             title: infoTitle,
             originalTitle: infoOriginalTitle,
-            originalLanguage: mediaInfo[i].original_language,
-            voteAverage: mediaInfo[i].vote_average,
-            voteAveragePercentage: mediaInfo[i].vote_average * 10, // vedi css inline, classe stars
-            originalLanguageUpperCase: mediaInfo[i].original_language.toUpperCase(),
-            poster: posterSize + mediaInfo[i].poster_path,
-            overview: mediaInfo[i].overview
+            originalLanguage: mediaJSON[i].original_language,
+            voteAverage: mediaJSON[i].vote_average,
+            voteAveragePercentage: mediaJSON[i].vote_average * 10, // vedi css inline, classe stars
+            originalLanguageUpperCase: mediaJSON[i].original_language.toUpperCase(),
+            poster: posterSize + mediaJSON[i].poster_path,
+            overview: mediaJSON[i].overview,
+            mediaId: mediaJSON[i].id
         }
         // Gestisco la bandierina della lingua inglese
         if (info.originalLanguage == 'en') { // FIXME: non riesco a far funzionare l'if in una funzione

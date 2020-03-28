@@ -23,12 +23,24 @@ $('.container').on('click', '#hide-overview-btn', function() {
     $(this).parent('.overview-container').removeClass('flex').addClass('hidden');
 });
 
-// Ottieni info aggiuntive dopo il click sul pulsante More Info
+// Ottieni info aggiuntive dopo il click sul pulsante Altre Info
 $('.container').on('click', '#more-info-btn', function() {
     var mediaID = $(this).parents('.box-container').data('boxId');
     var mediaType = $(this).parents('.box-container').data('mediaType');
-    ajaxGetMediaInfo(mediaType, mediaID);
+    if ($(this).siblings('.more-info-container').lenght) { // se more-info-container non esiste
+        $(this).siblings('.more-info-container').removeClass('hidden').addClass('flex'); // togli classe hidden e metti flex
+
+    } else {
+        ajaxGetMediaInfo(mediaType, mediaID);
+    }
 });
+
+// Nascondi Altre Info: click sul tasto chiudi -> aggiungi classe hidden a more-info-container
+$('.container').on('click', '#hide-more-info-btn', function() {
+    $(this).parents('.more-info-container').addClass('hidden').removeClass('flex');
+});
+
+
 
 // Funzioni
 function search() {
@@ -194,7 +206,7 @@ $('#red').click(function() {
 
 // test vari
 $('.container').data('test', {genres: [45, 84, 78]});
-console.log($('.container').data());
+// console.log($('.container').data());
 
 
 // OLD CODE ------------------------------------------------

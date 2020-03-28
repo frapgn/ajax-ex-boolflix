@@ -190,6 +190,7 @@ nav {
     width: 100%;
     height: 100%;
     display: flex;
+    transition: transform 300ms;
 }
 
 .img-container figure img {
@@ -285,7 +286,7 @@ nav {
     font-weight: 700;
 }
 
-.overview-btn {
+.media-red-btn {
     cursor: pointer;
     padding: 3px 7px;
     color: rgba(255,255,255,0.8);
@@ -300,7 +301,8 @@ nav {
 
 #show-overview-btn:hover,
 #hide-overview-btn:hover,
-#more-info-btn:hover {
+#more-info-btn:hover,
+#hide-more-info-btn:hover {
     background-color: rgba(230, 9, 20, 1);
     color: rgba(255, 255, 255, 1);
 }
@@ -331,7 +333,7 @@ nav {
 }
 
 .more-info-container {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     padding: 15px;
     z-index: 2;

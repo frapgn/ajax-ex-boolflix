@@ -53,11 +53,14 @@ function ajaxGetMediaInfo(mediaType, mediaId) {
         method: 'GET',
         data: {
             api_key: '75dbe3021ac7dc4530d9ca7b99004aa8',
-            language: 'it-IT'
+            language: 'it-IT',
+            append_to_response: 'credits'
         },
         success: function(res) {
             var genres = res.genres; // array con id e genere corrispondente
             appendGenres(genres, mediaId);
+
+            var cast = res.credits.cast; // array con il cast del film o serie tv
         },
         error: function() {
             console.log('Errore!');
@@ -76,7 +79,7 @@ function appendGenres(mediaGenres, mediaId) {
     for (var i = 0; i < mediaGenres.length; i++) {
         // var genreId = mediaGenres[i].id;
         var genreName = mediaGenres[i].name;
-        whereToAppend.find('.more-info').append('<span>' + genreName + '</span>');
+        whereToAppend.find('.more-info').append('<div>' + genreName + '</div>');
     }
 }
 
@@ -124,7 +127,8 @@ function appendMediaPreview(mediaType, mediaJSON) {
             originalLanguageUpperCase: mediaJSON[i].original_language.toUpperCase(),
             poster: posterSize + mediaJSON[i].poster_path,
             overview: mediaJSON[i].overview,
-            mediaId: mediaJSON[i].id
+            mediaId: mediaJSON[i].id,
+            genreIds: mediaJSON[i].genre_ids // array con gli id ed i corrispondenti generi
         }
         // Gestisco la bandierina della lingua inglese
         if (info.originalLanguage == 'en') { // FIXME: non riesco a far funzionare l'if in una funzione
@@ -138,6 +142,11 @@ function appendMediaPreview(mediaType, mediaJSON) {
         whereToAppend.append(boxTemplateHTML);
         posterNotAvailable();
         flagNotAvailable(info.originalLanguageUpperCase);
+
+        for (var x = 0; x < info.genreIds.length; x++) { // ciclo gli id dei generi
+            $('.box-container[data-box-id="' + info.mediaId + '"]').attr('data-genre-id-' + x, info.genreIds[x]); // li aggiungo come attributo-valore
+        }
+
     }
 }
 
@@ -182,6 +191,10 @@ $('#red').click(function() {
     $('head link[href*=red-theme]').remove();
     redTheme.insertAfter('head link[href*=green-theme]');
 });
+
+// test vari
+$('.container').data('test', {genres: [45, 84, 78]});
+console.log($('.container').data());
 
 
 // OLD CODE ------------------------------------------------

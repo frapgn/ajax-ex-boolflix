@@ -350,11 +350,22 @@ nav {
 
 .more-info {
     display: flex;
+    flex-direction: column;
     margin-bottom: 5px;
     font-size: 0.8rem;
     flex-basis: 80%;
     overflow: auto;
     scrollbar-width: thin;
+}
+
+.more-info h3 {
+    color: #fff;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.more-info h3:last-child {
+    margin-top: 20px;
 }
 
 .overview p {

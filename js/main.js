@@ -70,9 +70,9 @@ function ajaxGetMediaInfo(mediaType, mediaId) {
         },
         success: function(res) {
             var genres = res.genres; // array con id e genere corrispondente
-            appendGenres(genres, mediaId);
-
             var cast = res.credits.cast; // array con il cast del film o serie tv
+            appendMoreInfo(genres, cast, mediaId);
+
         },
         error: function() {
             console.log('Errore!');
@@ -83,7 +83,7 @@ function ajaxGetMediaInfo(mediaType, mediaId) {
 var moreInfoTemplateSrc = $('#more-info-template').html();
 var moreInfoTemplate = Handlebars.compile(moreInfoTemplateSrc);
 
-function appendGenres(mediaGenres, mediaId) {
+function appendMoreInfo(mediaGenres, mediaCast, mediaId) {
     var whereToAppend = $('.box-container[data-box-id="' + mediaId + '"] .box');
     moreInfoTemplateHTML = moreInfoTemplate();
     whereToAppend.append(moreInfoTemplateHTML);
@@ -91,7 +91,12 @@ function appendGenres(mediaGenres, mediaId) {
     for (var i = 0; i < mediaGenres.length; i++) {
         // var genreId = mediaGenres[i].id;
         var genreName = mediaGenres[i].name;
-        whereToAppend.find('.more-info').append('<div>' + genreName + '</div>');
+        whereToAppend.find('.more-info .genres').append('<div>' + genreName + '</div>');
+    }
+
+    for (var i = 0; i < 5; i++) {
+        var castName = mediaCast[i].name
+        whereToAppend.find('.more-info .cast').append('<div>' + castName + '</div>');
     }
 }
 

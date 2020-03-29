@@ -26,6 +26,31 @@
                 <button id="red">red</button>
             </div>
 
+            <div class="genre-select">
+                <select id="genre-select" name="">
+                    <option value="">Filtra per genere</option>
+                    <option value="28">Azione</option>
+                    <option value="12">Avventura</option>
+                    <option value="16">Animazione</option>
+                    <option value="35">Commedia</option>
+                    <option value="80">Crime</option>
+                    <option value="99">Documentario</option>
+                    <option value="18">Dramma</option>
+                    <option value="10751">Famiglia</option>
+                    <option value="14">Fantasy</option>
+                    <option value="36">Storia</option>
+                    <option value="27">Horror</option>
+                    <option value="10402">Musica</option>
+                    <option value="9648">Mistero</option>
+                    <option value="10749">Romantico</option>
+                    <option value="878">Fantascenza</option>
+                    <option value="10770">Film in TV</option>
+                    <option value="53">Thriller</option>
+                    <option value="10752">Guerra</option>
+                    <option value="37">Western</option>
+                </select>
+            </div>
+
             <div class="search-bar">
                 <input id="search" type="text" placeholder="Cerca..." name="" value="glass">
                 <button id="search-button">Cerca</button>
@@ -50,7 +75,7 @@
 
     <!-- box template -->
     <script id="box-template" type="text/x-handlebars-template">
-        <div class="box-container" data-box-id="{{mediaId}}" data-media-type="{{type}}">
+        <div class="box-container" data-box-id="{{mediaId}}" data-media-type="{{type}}" data-genre-ids="">
             <div class="img-container">
                 <!-- <img src="https://image.tmdb.org/t/p/{{poster}}" alt="{{title}}" onerror="this.src='img/default-poster.jpg';" > -->
                 <figure>

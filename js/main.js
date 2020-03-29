@@ -27,8 +27,8 @@ $('.container').on('click', '#hide-overview-btn', function() {
 $('.container').on('click', '#more-info-btn', function() {
     var mediaID = $(this).parents('.box-container').data('boxId');
     var mediaType = $(this).parents('.box-container').data('mediaType');
-    if ($(this).siblings('.more-info-container').lenght) { // se more-info-container non esiste
-        $(this).siblings('.more-info-container').removeClass('hidden').addClass('flex'); // togli classe hidden e metti flex
+    if ($(this).siblings('.more-info-container').lenght) {
+        $(this).siblings('.more-info-container').removeClass('hidden').addClass('flex');
 
     } else {
         ajaxGetMediaInfo(mediaType, mediaID);
@@ -40,13 +40,27 @@ $('.container').on('click', '#hide-more-info-btn', function() {
     $(this).parents('.more-info-container').addClass('hidden').removeClass('flex');
 });
 
+// Filtro i risultati della ricerca attraverso un menu a tendina con i generi
+$('#genre-select').change(function() {
+    var selectedGenre = $(this).val();
+    if (selectedGenre == '') {
+        $('.box-container').show();
+    } else {
+        $('.box-container').each(function() {
+            if( $(this).attr('data-genre-ids').includes(selectedGenre) ) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+});
 
-
-// Funzioni
+// Funzioni /////////////////////////////////////
 function search() {
     var searchValue = $('#search').val();
     if ($('#search').val() != '') {
-        // $('#search').val('');
+        // $('#search').val('');        // da decommentare
         $('.box-container').remove();
 
         // ajaxMovies(searchValue);     // OLD CODE
@@ -80,6 +94,7 @@ function ajaxGetMediaInfo(mediaType, mediaId) {
     });
 }
 
+// Template Altre Info + append Generi e Cast
 var moreInfoTemplateSrc = $('#more-info-template').html();
 var moreInfoTemplate = Handlebars.compile(moreInfoTemplateSrc);
 
@@ -160,8 +175,12 @@ function appendMediaPreview(mediaType, mediaJSON) {
         posterNotAvailable();
         flagNotAvailable(info.originalLanguageUpperCase);
 
+        var genreIds = '';
         for (var x = 0; x < info.genreIds.length; x++) { // ciclo gli id dei generi
-            $('.box-container[data-box-id="' + info.mediaId + '"]').attr('data-genre-id-' + x, info.genreIds[x]); // li aggiungo come attributo-valore
+            // $('.box-container[data-box-id="' + info.mediaId + '"]').attr('data-genre-id-' + x, info.genreIds[x]); // li aggiungo come attributo-valore
+            genreIds += info.genreIds[x] + ' ';
+            // console.log(genreIds);
+            $('.box-container[data-box-id="' + info.mediaId + '"]').attr('data-genre-ids', genreIds);
         }
 
     }

@@ -94,6 +94,10 @@ nav {
     align-items: center;
 }
 
+.nav-container a {
+    text-decoration: none;
+}
+
 #logo {
     /* color: rgba(230, 9, 20, 0.8); */
     font-size: 1.9rem;

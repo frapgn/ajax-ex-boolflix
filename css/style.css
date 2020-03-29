@@ -120,15 +120,36 @@ nav {
     background-color: rgba(0, 167, 0, 0.8);
 }
 
+#genre-select {
+    height: 30px;
+    width: 170px;
+    border-radius: 5px;
+    background-color: rgba(15, 15, 15, 1);
+    color: rgba(230, 9, 20, 0.8);
+    font-weight: 700;
+    padding: 0 10px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../img/caret-down-solid.svg');
+    background-repeat: no-repeat;
+    background-position: 95%;
+    background-size: .70rem;
+}
+
+#genre-select option {
+    border: none;
+}
+
 .search-bar input {
-    background: rgba(0,0,0,0.9);
+    background-color: rgba(15, 15, 15, 1);
     height: 30px;
     width: 200px;
     padding: 0 10px;
     margin-right: 5px;
     border-radius: 5px;
-    /* border: 1px solid rgba(230, 9, 20, 0.8); */
     color: rgba(230, 9, 20, 0.8);
+    font-weight: 700;
 }
 
 .search-bar input[placeholder] {

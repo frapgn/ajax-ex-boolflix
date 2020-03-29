@@ -11,8 +11,12 @@ h3 {
     color: rgba(230, 9, 20, 0.8);
 }
 
+#genre-select {
+    border: 2px solid rgba(230, 9, 20, 0.8);
+}
+
 .search-bar input {
-    border: 1px solid rgba(230, 9, 20, 0.8);
+    border: 2px solid rgba(230, 9, 20, 0.8);
 }
 
 .search-bar input[placeholder] {
